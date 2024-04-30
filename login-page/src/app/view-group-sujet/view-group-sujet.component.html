@@ -1,0 +1,23 @@
+<nav>
+    <ul>
+      <li><a href="http://www.fst.ac.ma/site/" >FS-Tétouan</a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a href="/espace-etudiant/liste-sujets">Liste des sujets</a></li>
+      <li><a href="/etudiant-deconnect" (click)="clear()">Logout</a></li>
+      <li style="float:right;"><a>Bonjour {{sessionStorage.getItem('etudiantFirstName')}} {{sessionStorage.getItem('etudiantSecondName')}}</a></li>
+    </ul>
+    
+    </nav>
+    
+    <div class = "container row">
+        <h2 style="text-align:center;" class="my-5">Détail du Sujet :</h2>
+        <div *ngFor="let g of group; let i=index;" class="mx-5 mt-5">
+          <h3> Groupe N° {{i + 1}}</h3>
+          <div *ngFor="let et of split(g)">
+            <h4 class="mx-5">{{et}}</h4>
+          </div>
+        </div>
+    </div>

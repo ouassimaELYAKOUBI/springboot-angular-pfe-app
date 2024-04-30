@@ -1,0 +1,87 @@
+<nav>
+<ul>
+  <li><a href="http://www.fst.ac.ma/site/" >FS-Tétouan</a></li>
+  <li><a></a></li>
+  <li><a></a></li>
+  <li><a></a></li>
+  <li><a></a></li>
+  <li><a href="/espace-etudiant/liste-sujets">Liste des sujets</a></li>
+  <li><a href="/etudiant-deconnect" (click)="clear()">Logout</a></li>
+  <li style="float:right;"><a>Bonjour {{sessionStorage.getItem('etudiantFirstName')}} {{sessionStorage.getItem('etudiantSecondName')}}</a></li>
+</ul>
+
+</nav>
+
+<div *ngIf="!pfeConfirmed">
+  <div class = "row">
+    <h2 style="text-align:center;">Liste des Sujets</h2>
+  </div>
+  <table class = "table table-striped table-bordered">
+    
+      <thead>
+          <tr>
+              <th> Nom de sujet</th>
+              <th> Description </th>
+              <th> Nombre des Etudiants</th>
+              <th> Encadrant </th>
+              <th> Postuler</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor = "let sujet of sujets" >
+              <td> {{ sujet.nomSujet }} </td>
+              <td> {{ sujet.description }} </td>
+              <td> {{ sujet.nombreEtudiants }} </td>
+              <td>{{ sujet.encadrant }}</td>
+              <td>
+                <button type="button" class="btn btn-warning" (click)="postuler(sujet.idSujet)">Postuler</button>
+                <button type="button" class="btn btn-info mx-2" (click)="view(sujet.idSujet)">View group</button>
+              </td>
+  
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<div *ngIf="pfeConfirmed">
+  <div class="container mt-5 mx-5">
+    <h2 class="mx-3 container my-5">Votre sujet a été accepté par votre encadrant, ci-dessous le détail de votre PFE :</h2>
+    <h4 class="mx-5 mt-3 container">Sujet : {{ sujets[idSujet - 1].nomSujet }}</h4>
+    <h4 class="mx-5 mt-3 container">Description : {{ sujets[idSujet - 1].description }}</h4>
+    <h4 class="mx-5 mt-3 container">Encadrant : {{ sujets[idSujet - 1].encadrant }}</h4>
+
+    <form method="post" (ngSubmit)="setGoogleDrive()" class="container row mt-5 mx-5">
+      <input type="text" [(ngModel)]="googleDrive" [disabled]="pfeEnd" name="googleDrive" id="googleDrive" placeholder="Lien google drive" class="col-4 mx-5">
+      <button type="submit" [disabled]="pfeEnd" class=" btn btn-info col-2">Valider</button>
+    </form>
+
+    <div class=" container mt-5" style="text-align: center;">
+      <div *ngIf="!pfeEnd">
+        <button (click)="askRDV()" class=" btn btn-secondary col-5">Demander un RDV ...</button>
+        <h4 *ngIf="rdvConfirmed" class="mt-5">Votre demande de RDV a été prise en compte. La date proposée par votre encadrant est :</h4>
+        <h3 *ngIf="rdvConfirmed" class="mt-3">{{dateRdv}}</h3>
+      </div>
+
+      <div *ngIf="!pfeEnd">
+        <button (click)="terminerPfe()" class=" btn btn-success col-5 mt-5" onclick="btnEndPfe();">Terminer votre PFE ...</button>
+      </div>
+
+      <div *ngIf="pfeEnd && pfeValidate" class="container cont my-5" style="text-align: left; margin: 0 10%; width: 80%;">
+        <label style="font-size: 16px; font-weight: bold;" class="bx-5">Remarques : </label>
+        <textarea disabled="true" [value]="pfeRemarques" name="remarques" id="remarques" rows="6"></textarea>
+        <label style="font-size: 16px; font-weight: bold;" class="bx-5">Note : </label>
+        <input type="text" disabled="true" [value]="pfeNote" name="note" id="note"> 
+        <label class="d-block bx-5" style="font-size: 16px; font-weight: bold;">Date de la soutenance :</label>
+        <input type="date" disabled="true" [value]="pfeDateSoutenance" name="datePicker" id="datePicker" class="col-4">
+      </div>
+
+      <div *ngIf="pfeEnd && !pfeValidate">
+          <h4 class="container mt-4" style="text-align: center;">En attente de validation par votre encadrant ...</h4>
+      </div>
+    
+  </div>
+</div>
+
+
+
+

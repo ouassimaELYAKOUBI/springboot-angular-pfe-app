@@ -1,0 +1,79 @@
+  <nav>
+    <ul>
+      <li><a href="http://www.fst.ac.ma/site/" >FS-Tétouan</a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a href="/espace-encadrant/liste-sujets-e">Liste des sujets</a></li>
+      <li><a href="/encadrant-deconnect" (click)="clear()">Logout</a></li>
+      <li style="float:right;"><a>Bonjour {{sessionStorage.getItem('encadrantFirstName')}} {{sessionStorage.getItem('encadrantSecondName')}}</a></li>
+    </ul>
+  </nav>
+
+
+  <h3 style="text-align: center;" class="my-5"> View Sujet Details</h3>
+
+  <div class="container">
+      <div class="my-2">
+          <label> <b> Nom de Sujet : </b></label> {{sujet.nomSujet}}
+      </div>
+      <div class="my-2">
+          <label> <b> Description : </b></label> {{sujet.description}}
+      </div>
+      <div class="my-2">
+          <label> <b> Nombre d'Etudiants : </b></label> {{sujet.nombreEtudiants}}
+      </div>
+
+    <div>
+      <h3 class="mt-5"> Groupes ayant postulé pour ce sujet :</h3>
+    </div>
+
+    <div class = "container row mt-2">
+        <h4 *ngIf="isGroupEmpty" class="mt-4" style="text-align: center;">Aucun groupe n'a postulé pour ce sujet !</h4>
+    </div>
+
+    <div class = "container row mt-2">
+      <div *ngFor="let g of group; let i=index;" class="mx-5 mt-4" style="border-bottom: solid 2px;">
+        <h3> Groupe N° {{i + 1}}</h3>
+        <div *ngFor="let et of split(g)">
+          <h4 class="mx-5">{{et}}</h4>
+        </div>
+        <button (click)="acceptGroup(i)" [disabled]="pfeConfirmed[i]" class = "btn btn-info" style="width: 30%; margin: 20px auto;" onclick="btnAcceptPostuler();">Accepter</button>
+        <div *ngIf="pfeConfirmed[i]" class="container row mt-4">
+          <h3 class="mx-2">Lien Google Drive :</h3><a class="mb-5" style="text-align: center;" href="{{googleDrive[i]}}" target="_blank">{{googleDrive[i]}}</a>
+        </div>
+
+        <div *ngIf="!rdvDemand[i]" class="container row my-4">
+          <h3 class="mx-2">Demande de RDV :</h3>
+          <p class="mx-5">Aucune demande de RDV de ce groupe.</p>
+        </div>
+
+        <div *ngIf="!pfeEnd[i]">
+          <div *ngIf="rdvDemand[i]" class="container row my-4">
+            <h3 class="mx-2">Ce groupe demande un RDV : </h3>
+            <h4 class="mx-5">Date proposée : </h4> 
+            <form (ngSubmit)="validRDV(g, i)" style="text-align: center;">
+              <input type="date" [(ngModel)]="dateRDV[i]" name="datePicker" id="datePicker" [value]="dateRDV[i]">
+              <button type="submit" [disabled]="rdvConfirm[i]" class="btn btn-info mx-5" style="padding: 15px 30px; font-size: 18px;" onclick="btnValidateRDV();">Valider</button>
+            </form>
+          </div>
+        </div>
+
+        <div *ngIf="pfeEnd[i]" class="cont">
+          <h3>Ce groupe réclame avoir terminer son projet : </h3>
+         <form (ngSubmit)="validatePFE(g, i)">
+            <label>Remarques : * </label>
+            <textarea [(ngModel)]="pfeRemarques[i]" [disabled]="pfeValidate[i]" [value]="pfeRemarques[i]" name="remarques" id="remarques" placeholder="Saisir les remarques sur le PFE..." rows="6" required></textarea>
+            <label>Note : * </label>
+            <input type="text" [(ngModel)]="pfeNote[i]" [disabled]="pfeValidate[i]" [value]="pfeNote[i]" name="note" id="note" placeholder="Saisir la note du PFE" required> 
+            <label class="d-block">Date de la soutenance : *</label>
+            <input type="date" [(ngModel)]="pfeDateSoutenance[i]" [disabled]="pfeValidate[i]" [value]="pfeDateSoutenance[i]" name="datePicker" id="datePicker" class="col-4" required>
+            <button type="submit" [disabled]="pfeValidate[i]" class="btn btn-success mx-5 col-4" style="padding: 15px 30px; font-size: 18px;" onclick="btnValidatePFE();">Valider le PFE</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>

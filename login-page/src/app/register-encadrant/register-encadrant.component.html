@@ -1,0 +1,16 @@
+<div class="login">
+    <h1>Espace Encadrant - S'inscrire</h1>
+    <form method="post" (ngSubmit)="encadrantRegister()">
+      <p><input type="text" [(ngModel)]="encadrant.firstName" name="firstName" id="firstName" value="" placeholder="First name"></p>
+      <p><input type="text" [(ngModel)]="encadrant.secondName" name="secondName" id="secondName" value="" placeholder="Second name"></p>
+      <p><input type="text" [(ngModel)]="encadrant.departement" name="departement" id="departement" value="" placeholder="Departement"></p>
+      <p><input type="text" [(ngModel)]="encadrant.email" name="email" value="" id="email" placeholder="Email"></p>
+      <p><input type="password" [(ngModel)]="encadrant.password" name="password" id="password" value="" placeholder="Password"></p>
+      
+      <p class="submit"><input type="submit" name="commit" value="S'inscrire"></p>
+    </form>
+  </div>
+  
+  <div class="login-help">
+    <p>Vous êtes déjà inscrit ? <a routerLink="/login-encadrant">Cliquez ici pour se connecter.</a></p>
+</div>

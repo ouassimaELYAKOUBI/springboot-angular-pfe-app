@@ -1,0 +1,45 @@
+<!-- <div *ngIf="isAuthenticated" class="card" style="width: 100%;">
+    <div class="card-header">
+      Bonjour {{sessionStorage.getItem('etudiantFirstName')}} {{sessionStorage.getItem('etudiantSecondName')}},
+    </div>
+    <ul class="list-group list-group-flush">
+      <li *ngIf="isConfirmed" class="list-group-item">Heureux de vous annoncer que votre compte est activé !</li>
+      <li *ngIf="!isConfirmed" class="list-group-item">Malheureusement, votre compte n'est pas encore activé !</li>
+      <a routerLink="/etudiant-deconnect" (click)="clear()"><li class="list-group-item">Se déconnecter</li></a>
+    </ul>
+</div> -->
+
+            <ul *ngIf="isAuthenticated">
+                <li><a href="http://www.fst.ac.ma/site/" >FS-Tétouan</a></li>
+                <li><a></a></li>
+                <li><a></a></li>
+                <li><a></a></li>
+                <li><a></a></li>
+                <li><a href="/espace-etudiant/liste-sujets">Liste des sujets</a></li>
+                <li><a href="/etudiant-deconnect" (click)="clear()">Logout</a></li>
+                <li style="float:right;"><a>Bonjour {{sessionStorage.getItem('etudiantFirstName')}} {{sessionStorage.getItem('etudiantSecondName')}}</a></li>
+            </ul>
+
+            <form *ngIf="!isGroupFormed" method="post" (ngSubmit)="saveGroup()" style="text-align: center;">
+                <select [(ngModel)]="etudiantName" name="groupEtudiant" class="container form-select form-select-lg mb-3 mt-5" aria-label=".form-select-lg example" id="nameEtudiant" onchange="btnUpdate()">
+                  <option selected>Choisir des étudiants pour former votre groupe...</option>
+                  <option *ngFor = "let etudiant of listEtudiant">{{ etudiant.firstName }} {{ etudiant.secondName }}</option>
+                </select>
+
+                <input class="btn btn-info col-4 mx-5" value="Ajouter" onclick="remove()" (click)="addToGroup()" id="btn" disabled>
+                <input type="submit" class="btn btn-info col-4 mx-5" value="Terminer" id="btn">
+            </form>
+
+            <div *ngIf="isGroupFormed" id="myGroup" class="container mt-5">
+                <h2>Votre groupe se compose de : </h2>
+                <tbody>
+                  <div *ngFor = "let name of myGroup" class="container mt-4 mx-5">
+                      <h3> {{ name }} </h3>
+                  </div>
+              </tbody>
+            </div>
+                
+                
+          
+                
+   

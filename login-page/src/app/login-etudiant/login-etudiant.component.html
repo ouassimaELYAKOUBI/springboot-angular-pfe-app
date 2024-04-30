@@ -1,0 +1,13 @@
+<div class="login">
+    <h1>Espace Etudiant - Se connecter</h1>
+    <form method="post" (ngSubmit)="etudiantLogin()">
+      <p><input type="text" [(ngModel)]="etudiant.email" name="email" id="email" value="" placeholder="Email"></p>
+      <p><input type="password" [(ngModel)]="etudiant.password" name="password" id="password" value="" placeholder="Password"></p>
+      
+      <p class="submit"><input type="submit" name="commit" value="Se connecter"></p>
+    </form>
+  </div>
+  
+  <div class="login-help">
+    <p>Vous n'êtes pas encore inscrit ? <a routerLink="/register-etudiant">Cliquez ici pour s'inscrire.</a></p>
+</div>

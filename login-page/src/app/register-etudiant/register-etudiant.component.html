@@ -1,0 +1,24 @@
+<div class="login">
+    <h1>Espace Etudiant - S'inscrire</h1>
+    <form method="post" (ngSubmit)="etudiantRegister()">
+      <p><input type="text" [(ngModel)]="etudiant.firstName" name="firstName" id="firstName" value="" placeholder="First name"></p>
+      <p><input type="text" [(ngModel)]="etudiant.secondName" name="secondName" id="secondName" value="" placeholder="Second name"></p>
+      <p><select [(ngModel)]="etudiant.filiere" name="filiere" id="filiere" placeholder="Filiere">
+        <option value="M2I">M2I</option>
+        <option value="MQL">MQL</option>
+        <option value="SMI6">SMI6</option>
+        <option value="Pysique">Pysique</option>
+        <option value="Maths appliqués">Maths appliqués</option>
+        </select></p>
+      <!-- <p><input type="text" [(ngModel)]="etudiant.filiere" name="filiere" id="filiere" value="" placeholder="Filiere"></p> -->
+      <p><input type="text" [(ngModel)]="etudiant.apogee" name="apogee" id="apogee" value="" placeholder="Apogee"></p>
+      <p><input type="text" [(ngModel)]="etudiant.email" name="email" id="email" value="" placeholder="Email"></p>
+      <p><input type="password" [(ngModel)]="etudiant.password" name="password" id="password" value="" placeholder="Password"></p>
+      
+      <p class="submit"><input type="submit" name="commit" value="S'inscrire"></p>
+    </form>
+  </div>
+  
+  <div class="login-help">
+    <p>Vous êtes déjà inscrit ? <a routerLink="/login-etudiant">Cliquez ici pour se connecter.</a></p>
+</div>

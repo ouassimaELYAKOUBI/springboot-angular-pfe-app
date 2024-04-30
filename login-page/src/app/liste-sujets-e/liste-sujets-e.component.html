@@ -1,0 +1,45 @@
+<nav>
+    <ul>
+      <li><a href="http://www.fst.ac.ma/site/" >FS-Tétouan</a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a></a></li>
+      <li><a href="/espace-encadrant/liste-sujets-e">Liste des sujets</a></li>
+      <li><a href="/encadrant-deconnect" (click)="clear()">Logout</a></li>
+      <li style="float:right;"><a>Bonjour {{sessionStorage.getItem('encadrantFirstName')}} {{sessionStorage.getItem('encadrantSecondName')}}</a></li>
+    </ul>
+    
+    </nav>
+    
+  
+    
+      <div class = "row">
+        <h2 style="text-align:center;">Liste des Sujets</h2>
+    </div>
+    <div>
+    <button (click) = "createSujet()" class = "btn btn-success" style="text-align:center;"> Add new Sujet</button>
+  </div>
+
+    <table class = "table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th> Nom de sujet</th>
+                <th> Description </th>
+                <th> Nombre des Etudiants</th>
+                <th> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let sujet of sujets" >
+                    <td *ngIf="sujet.encadrant === encadrantName"> {{ sujet.nomSujet }} </td>
+                    <td *ngIf="sujet.encadrant === encadrantName"> {{ sujet.description }} </td>
+                    <td *ngIf="sujet.encadrant === encadrantName"> {{ sujet.nombreEtudiants }} </td>
+                    <td *ngIf="sujet.encadrant === encadrantName">
+                        <button (click) = "updateSujet(sujet.idSujet)" class = "btn btn-primary"> Update</button>
+                        <button (click) = "deleteSujet(sujet.idSujet)" class = "btn btn-danger" style="margin-left: 10px"> Delete</button>
+                        <button (click) = "sujetDetails(sujet.idSujet)" class = "btn btn-primary" style="margin-left: 10px"> View</button>
+                    </td>
+            </tr>
+        </tbody>
+    </table>

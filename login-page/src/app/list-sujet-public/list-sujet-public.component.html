@@ -1,0 +1,22 @@
+<table>
+    <thead>
+      <tr>
+        <th>Nom du sujet PFE</th>
+        <th>Description du sujet PFE</th>
+        <th>Nom de l'encadrant</th>
+        <th>Nombre d'étudiant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let sujet of sujets">
+        <th>{{ sujet.nomSujet }}</th>
+        <td>{{ sujet.description }}</td>
+        <td>{{ sujet.encadrant }}</td>
+        <td style="width: 10% !important;">{{ sujet.nombreEtudiants }}</td>
+      </tr>
+    </tbody>
+
+    <button routerLink="/" type="button" class="btn btn-outline-success" style="width: 400px; margin: 50px auto; padding: 20px 40px; font-size: 25px;">Revenir à l'accueil</button>
+
+  </table>
+
